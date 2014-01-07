@@ -1,4 +1,5 @@
 app = angular.module("app", [])
+
 app.directive "ngHtml", ->
   (scope, element, attrs) ->
     scope.$watch attrs.ngHtml, (value) ->
@@ -25,6 +26,9 @@ app.controller "IndexCtrl", ["$scope", "$http", ($scope, $http) ->
 
       if $scope.gems.length == 1
         $scope.$broadcast 'showAssets'
+
+      angular.forEach $scope.gems, (gem) ->
+        gem.versions.sort(semverSort)
 
   $scope.fetch()
 
